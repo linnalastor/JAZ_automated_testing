@@ -9,10 +9,18 @@ option="$1"
 
 case "$option" in
   mysql)
-    mysql zabbix < $2 #> /dev/null 2>&1 
+    if [ "$3" != "" ]; then
+      mysql zabbix < $2
+    else
+      mysql zabbix < $2 > /dev/null 2>&1 
+    fi
     ;;
   psql)
-    sudo -u zabbix -p zabbix psql < $2 #> /dev/null 2>&1
+    if [ "$3" != "" ]; then
+      sudo -u zabbix -p zabbix psql < $2
+    else
+      sudo -u zabbix -p zabbix psql < $2 > /dev/null 2>&1 
+    fi
     ;;
   *)
     echo "Invalid option. Use 'mysql' or 'psql'."

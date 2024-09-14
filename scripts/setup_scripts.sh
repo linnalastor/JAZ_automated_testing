@@ -1,13 +1,18 @@
-ip_address="10.1.9.84"
-sed -i "s/ip_address/$ip_address/g" jobnetctl.sh
+server_ip_address="10.1.9.84" #ip address of the machine where JAZ service service exists
+agent_type="win" #target host type
+
+sed -i '/server_ip_address/d' /etc/environment
+sed -i '/agent_type/d' /etc/environment
 
 rm -rf /tmp/jaz_testing/
-rm -rf /tmp/jaz_testing/testing_result
 rm -rf /usr/local/bin/db_execute
 rm -rf /usr/local/bin/jobnetctl
 rm -rf /usr/local/bin/testresult
 
 mkdir -p /tmp/jaz_testing/testing_result
+
+echo "server_ip_address="$server_ip_address"" | sudo tee -a /etc/environment > /dev/null 2>&1
+echo "agent_type="$agent_type"" | sudo tee -a /etc/environment > /dev/null 2>&1
 
 cp -f querys.txt /tmp/jaz_testing/
 

@@ -1,6 +1,11 @@
-succeed="\e[32mSucceed\e[0m"
-failed="\e[31mFailed\e[0m"
+TARGET_DIR=$(pwd)
+subdirs=$(find "$TARGET_DIR" -mindepth 1 -maxdepth 1 -type d)
 
-./testcase1.sh
-return_code=$?
-testresult testcase1 $return_code
+for dir in $subdirs; do
+ scripts=$(find "$dir" -type f -name "*.sh")
+ for script in $scripts; do
+  bash "$script"
+  return_code=$?
+  testresult print $script $return_code
+ done
+done
