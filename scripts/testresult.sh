@@ -3,7 +3,7 @@ if [ "$#" -lt 3 ]; then
   exit 1
 fi
 if [ "$#" -lt 4 ] && [ "$1" == "log" ]; then
-  echo "Usage: testresult <print | log> <test_case> <result> <jobnet id>"
+  echo "Usage: testresult log <test_case> <result> <jobnet id>"
   exit 1
 fi
 
@@ -17,12 +17,12 @@ case "$1" in
     ;;
     log)
       if [ $3 == "0" ]; then
-        result="successfully finished"
+        result="\e[32m$2.sh has successfully finished.\e[0m "
       else
-        result="failed"
+        result="\e[31m$2.sh has Failed.\e[0m "
       fi
       logfile="/tmp/jaz_testing/testing_result/$2.log"
-      echo -e "\e[32m$2.log has $result.\e[0m \nTest Result" >> "$logfile"
+      echo -e "$result\nTest Result" >> "$logfile"
       echo $(jobnetctl jobarg_get $4) >> "$logfile"
     ;;
   *)

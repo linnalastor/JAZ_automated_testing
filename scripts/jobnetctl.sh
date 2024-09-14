@@ -6,6 +6,7 @@ if [ "$#" -lt 1 ]; then
   2. jobnetctl enable_default <jobnet id>                       ===> Enable jobnet version with the latest updated date\n
   3. jobnetctl enable <jobnet id> <jobnet name> <description>   ===> Enable a specific jobnet version\n
   4. jobnetctl disable <jobnet id>                              ===> Disable the jobnet object
+  5. jobnetctl abort <jobnet id>                                ===> force stop the jobnet
   "
   echo "Usage: jobnetctl <jobarg_get | jobnet_status>"
   echo "This usage is for get information such as\n
@@ -72,7 +73,6 @@ case "$option" in
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         echo $query > /tmp/jaz_testing/query.sql
         echo $(db_execute psql /tmp/jaz_testing/query.sql select | grep -Eo '^[[:space:]]*[0-9]+' | head -n 1)
-        
     ;;
     jobarg_get)
       jobarg_get -z $server_ip_address -U Admin -P zabbix -r $jobnet_id &> /tmp/jaz_testing/output.txt
