@@ -25,7 +25,7 @@ else
 fi
 
 echo -e "\e[32m\nAutomated testing has finished.\e[0m "
-echo -e "\e[32mPassed Testcase : $passed_percentage\e[0m "
+echo -e "\e[32mPassed Testcase : $passed_percentage%\e[0m "
 if [ "$passed_percentage" -lt 100 ]; then
 echo -e "\e[31mCheck failed testcase in [/tmp/jaz_testing/testing_result/failed_testcase.log]\e[0m "
 fi

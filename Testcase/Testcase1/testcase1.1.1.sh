@@ -1,6 +1,6 @@
 source /etc/environment
-jobnetctl enable JOBNET_1 "job_icon($agent_type)" hostname
-jobnet_id=$(jobnetctl run JOBNET_1)
+jobnetctl enable ${agent_type}_Jobnet "job_icon" hostname
+jobnet_id=$(jobnetctl run ${agent_type}_Jobnet)
 sleep 10 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 if [ "$jobnet_status" == "3" ]; then

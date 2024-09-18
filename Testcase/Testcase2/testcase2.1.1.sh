@@ -1,8 +1,8 @@
 source /etc/environment
-jobnetctl enable JOBNET_1 "fcopy_icon($agent_type)" "file creation included"
-jobnet_id=$(jobnetctl run JOBNET_1)
-jobnetctl enable JOBNET_1 "fwait_icon($agent_type)" "wait for file creation"
-jobnet_id2=$(jobnetctl run JOBNET_1)
+jobnetctl enable ${agent_type}_Jobnet "fcopy_icon" "file creation included"
+jobnet_id=$(jobnetctl run ${agent_type}_Jobnet)
+jobnetctl enable ${agent_type}_Jobnet "fwait_icon" "wait for file creation"
+jobnet_id2=$(jobnetctl run ${agent_type}_Jobnet)
 sleep 10 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 jobnet2_status=$(jobnetctl jobnet_status $jobnet_id2)
