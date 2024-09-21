@@ -17,11 +17,11 @@
 5. Execute query
     ### add the query into the script/querys.txt [ query_id : query ]
 
-    db_execute <mysql | psql> <query_file>
+    db_execute <query_file>
     ### you have to create your own query file. Default path is [/tmp/jaz_testing/query.sql]
-
-    ###If you want the execution of query to output execution result add an extra option
-    examplle : db_execute <mysql | psql> <query_file> select
+    
+    ### If you want the execution of query to output execution result add an extra option
+    examplle : db_execute <query_file> select
 
 6. Output Test result
     testresult print <test_case> <result>

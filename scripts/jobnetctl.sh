@@ -12,11 +12,13 @@ if [ "$#" -lt 1 ]; then
   echo "This usage is for get information such as\n
   1. jobnetctl jobarg_get <jobnet id>       ===> jobnet's basic information 
   2. jobnetctl jobnet_status <jobnet id>    ===> jobnet's status  
-  "
+  "  
+  echo "Usage: jobnetctl delete_all_jobnet"
+  echo "This usage perform deletion of all jobnet's information"
   exit 1
 fi
 option="$1"
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 2 ] && [ "$option" != "delete_all_jobnet" ]; then
   echo "Usage: jobnetctl $option <jobnet_id>"
   exit 1
 fi
@@ -43,7 +45,7 @@ case "$option" in
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         echo $query > /tmp/jaz_testing/query.sql
-        db_execute psql /tmp/jaz_testing/query.sql
+        db_execute /tmp/jaz_testing/query.sql
     ;;
     enable)
         jobnet_name=$3
@@ -54,29 +56,34 @@ case "$option" in
         query=$(echo "$query" | sed "s/\$jobnet_name/'$jobnet_name'/")
         query=$(echo "$query" | sed "s/\$memo/'$description'/")
         echo $query > /tmp/jaz_testing/query.sql
-        db_execute psql /tmp/jaz_testing/query.sql
+        db_execute  /tmp/jaz_testing/query.sql
     ;;
     disable)
         query=$(grep "disable_jobnet" /tmp/jaz_testing/querys.txt | awk -F": " '{print $2}')
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         echo $query > /tmp/jaz_testing/query.sql
-        db_execute psql /tmp/jaz_testing/query.sql
+        db_execute /tmp/jaz_testing/query.sql
     ;;
     abort)
         query=$(grep "abort_jobnet" /tmp/jaz_testing/querys.txt | awk -F": " '{print $2}')
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         echo $query > /tmp/jaz_testing/query.sql
-        db_execute psql /tmp/jaz_testing/query.sql
+        db_execute /tmp/jaz_testing/query.sql
     ;;
     jobnet_status)
         query=$(grep "jobnet_status" /tmp/jaz_testing/querys.txt | awk -F": " '{print $2}')
         query=$(echo "$query" | sed "s/\$jobnet_id/'$jobnet_id'/")
         echo $query > /tmp/jaz_testing/query.sql
-        echo $(db_execute psql /tmp/jaz_testing/query.sql select | grep -Eo '^[[:space:]]*[0-9]+' | head -n 1)
+        echo $(db_execute /tmp/jaz_testing/query.sql select | grep -Eo '^[[:space:]]*[0-9]+' | head -n 1)
     ;;
     jobarg_get)
       jobarg_get -z $server_ip_address -U Admin -P zabbix -r $jobnet_id &> /tmp/jaz_testing/output.txt
       echo "$(cat /tmp/jaz_testing/output.txt)"
+    ;;
+    delete_all_jobnet)
+        query=$(grep "delete_jobnet" /tmp/jaz_testing/querys.txt | awk -F": " '{print $2}')
+        echo $query > /tmp/jaz_testing/query.sql
+        db_execute /tmp/jaz_testing/query.sql
     ;;
   *)
     echo "Invalid option. Use < run | enable | disable | abort >."

@@ -1,5 +1,11 @@
 disable_jobnet : update ja_jobnet_control_table set valid_flag = 0 where jobnet_id = $jobnet_id and valid_flag=1;
 enable_jobnet : update ja_jobnet_control_table set valid_flag = 1 where jobnet_id = $jobnet_id and jobnet_name = $jobnet_name and memo = $memo;
 enable_default_jobnet : update ja_jobnet_control_table set valid_flag = 1 where jobnet_id = $jobnet_id and update_date = (SELECT MAX(update_date) FROM ja_jobnet_control_table WHERE jobnet_id = $jobnet_id);
-abort_jobnet : update ja_run_jobnet_summary_table set jobnet_abort_flag = 1 where jobnet_id = $jobnet_id;
+abort_jobnet : update ja_run_jobnet_summary_table set jobnet_abort_flag = 1 where inner_jobnet_id = $jobnet_id;
 jobnet_status : select status from ja_run_jobnet_table where inner_jobnet_id = $jobnet_id;
+jobnet_stdout : select before_value from ja_run_value_before_table where inner_jobnet_id = $jobnet_id and value_name = 'STD_OUT';
+update_JOBNET_KEEP_SPAN : update ja_parameter_table set value = $value where parameter_name = 'JOBNET_KEEP_SPAN';
+update_JOBLOG_KEEP_SPAN : update ja_parameter_table set value = $value where parameter_name = 'JOBLOG_KEEP_SPAN';
+total_summary_jobnet_count : select count(*) from ja_run_jobnet_summary_table;
+total_jobnet_log_count : select count(*) from ja_run_log_table;
+delete_jobnet : delete from ja_run_jobnet_table;

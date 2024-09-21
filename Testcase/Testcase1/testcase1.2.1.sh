@@ -1,0 +1,22 @@
+source /etc/environment
+
+if [ "$agent_type" == "Win" ]; then 
+  jobnetctl enable "Window_Agent" "service_control" "restart 240"
+  jobnet_id=$(jobnetctl run "Window_Agent")
+  sleep 240
+elif [ "$agent_type" == "Linux" ]; then
+  jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
+  jobnet_id=$(jobnetctl run ${agent_type}_Jobnet) 
+  systemctl stop jobarg-agentd
+  sleep 130
+  systemctl start jobarg-agentd
+fi
+
+jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
+if [ "$jobnet_status" == "4" ]; then
+  testresult log "testcase1.0.0" "0" $jobnet_id
+  exit 0
+else
+  testresult log "failed_testcase2.0.0" "1" $jobnet_id
+  exit 1
+fi
