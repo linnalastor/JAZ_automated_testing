@@ -1,5 +1,5 @@
 source /etc/environment
-jobnetctl enable ${agent_type}_Jobnet "job_icon" "timeout 1000"
+jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
 jobnetctl run ${agent_type}_Jobnet > /dev/null 2>&1 
 
 sleep 60

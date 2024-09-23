@@ -3,8 +3,15 @@ source /etc/environment
 if [ "$agent_type" == "Win" ]; then 
   jobnetctl enable "Window_Agent" "service_control" "restart 120"
   jobnet_id=$(jobnetctl run "Window_Agent")
+  sleep 140
+elif [ "$agent_type" == "Linux" ]; then 
+  jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
+  jobnet_id=$(jobnetctl run ${agent_type}_Jobnet) 
+  systemctl stop jobarg-agentd
+  sleep 90
+  systemctl start jobarg-agentd
+  sleep 10
 fi
-sleep 140
 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 if [ "$jobnet_status" == "3" ]; then

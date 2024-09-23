@@ -10,6 +10,7 @@ elif [ "$agent_type" == "Linux" ]; then
   systemctl stop jobarg-agentd
   sleep 130
   systemctl start jobarg-agentd
+  sleep 10
 fi
 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)

@@ -1,6 +1,6 @@
 source /etc/environment
 jobnetctl delete_all_jobnet
-jobnetctl enable ${agent_type}_Jobnet "job_icon" "timeout 1000"
+jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
 jobnet_id=$(jobnetctl run ${agent_type}_Jobnet)
 sleep 3
 jobnetctl abort $jobnet_id
