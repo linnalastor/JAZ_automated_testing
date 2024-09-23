@@ -8,7 +8,7 @@ elif [ "$agent_type" == "Linux" ]; then
   jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
   jobnet_id=$(jobnetctl run ${agent_type}_Jobnet) 
   systemctl stop jobarg-agentd
-  sleep 130
+  sleep 150
   systemctl start jobarg-agentd
   sleep 10
 fi

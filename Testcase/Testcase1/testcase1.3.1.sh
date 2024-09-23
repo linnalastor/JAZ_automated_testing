@@ -8,13 +8,13 @@ elif [ "$agent_type" == "Linux" ]; then
   jobnetctl enable ${agent_type}_Jobnet "job_icon" "sleep 1000"
   jobnet_id=$(jobnetctl run ${agent_type}_Jobnet) 
   systemctl stop jobarg-agentd
-  sleep 90
+  sleep 60
   systemctl start jobarg-agentd
   sleep 10
 fi
 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
-if [ "$jobnet_status" == "3" ]; then
+if [ "$jobnet_status" == "2" ]; then
   testresult log "testcase1.0.0" "0" $jobnet_id
   jobnetctl delete_all_jobnet
   exit 0
