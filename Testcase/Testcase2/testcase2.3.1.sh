@@ -20,6 +20,7 @@ elif [ "$agent_type" == "Linux" ]; then
 fi
 sleep 10
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
+jobnetctl delete_all_jobnet
 if [ "$jobnet_status" == "4" ]; then
   testresult log "testcase2.0.0" "0" $jobnet_id
   exit 0

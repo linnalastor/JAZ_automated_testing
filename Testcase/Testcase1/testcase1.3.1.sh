@@ -16,7 +16,6 @@ fi
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 if [ "$jobnet_status" == "2" ]; then
   testresult log "testcase1.0.0" "0" $jobnet_id
-  jobnetctl delete_all_jobnet
   exit 0
 else
     testresult log "failed_testcase2.0.0" "1" $jobnet_id
