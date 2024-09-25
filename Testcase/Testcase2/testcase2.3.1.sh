@@ -2,7 +2,7 @@ source /etc/environment
 
 if [ "$agent_type" == "Win" ]; then 
   jobnetctl enable "Window_Agent" "service_control" "restart 240"
-  jobnetctl run "Window_Agent"
+  jobnetctl run "Window_Agent" > /dev/null 2>&1 
   sleep 10
 elif [ "$agent_type" == "Linux" ]; then 
   systemctl stop jobarg-agentd
