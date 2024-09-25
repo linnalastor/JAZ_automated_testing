@@ -7,19 +7,20 @@ if [ "$#" -lt 4 ] && [ "$1" == "log" ]; then
   exit 1
 fi
 
+current_time=$(date +"%H:%M:%S")
 case "$1" in
     print)
       if [ $3 == "0" ]; then  
-          echo -e "$2 \e[32mSucceed\e[0m"
+          echo -e "$current_time $2 \e[32mSucceed\e[0m"
       else
-          echo -e "$2 \e[31mFailed\e[0m"
+          echo -e "$current_time $2 \e[31mFailed\e[0m"
       fi
     ;;
     log)
       if [ $3 == "0" ]; then
-        result="\e[32m$2.sh has successfully finished.\e[0m "
+        result="\e[32m$2.sh has successfully finished.\e[0m $current_time"
       else
-        result="\e[31m$2.sh has Failed.\e[0m "
+        result="\e[31m$2.sh has Failed.\e[0m $current_time"
       fi
       logfile="/tmp/jaz_testing/testing_result/$2.log"
       echo -e "$result\nTest Result" >> "$logfile"

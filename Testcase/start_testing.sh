@@ -3,19 +3,31 @@ subdirs=$(find "$TARGET_DIR" -mindepth 1 -maxdepth 1 -type d)
 count=0
 passed=0
 for dir in $subdirs; do
- scripts=$(find "$dir" -type f -name "*.sh")
- for script in $scripts; do
-  bash "$script"
-  return_code=$?
-  file_name=$(basename "$script")
-  testresult print $file_name $return_code
-  ((count++))
-  if [ "$return_code" == "0" ]; then
-    ((passed++))
-  else
-    echo $script >> /tmp/jaz_testing/testing_result/failed_testcase.log
-  fi
- done
+  scripts=$(find "$dir" -type f -name "*.sh")
+  for script in $scripts; do
+    file_name=$(basename "$script")
+    current_time=$(date +"%H:%M:%S")
+    echo "$current_time $file_name execution will start now"
+    bash "$script"
+    return_code=$?
+    testresult print $file_name $return_code
+    $defunct=$(ps -aux | grep defunct | wc -l)
+    if [ "$defunct" > "1" ]; then
+      sleep 10
+      $defunct=$(ps -aux | grep defunct | wc -l)
+      if [ "$defunct" > "1" ]; then
+        echo -e "\e[31m $defunct defunct process found. \e[0m "
+      fi
+    fi
+
+    ((count++))
+    if [ "$return_code" == "0" ]; then
+      ((passed++))
+      echo $script >> /tmp/jaz_testing/testing_result/succeed_testcase.log
+    else
+      echo $script >> /tmp/jaz_testing/testing_result/failed_testcase.log
+    fi
+  done
 done
 
 if [ "$count" -gt 0 ]; then
