@@ -1,27 +1,27 @@
 # Jobnet Cotrol
-- Enable a specific jobnet version
-    jobnetctl enable <jobnet id> <jobnet name> <description>
+- Enable a specific jobnet version: 
+    - jobnetctl enable <jobnet id> <jobnet name> <description>
 
-- Enable jobnet version with the latest updated date
-    jobnetctl enable_default <jobnet id>
+- Enable jobnet version with the latest updated date: 
+    - jobnetctl enable_default <jobnet id>
     
-- Disable jobnet 
-    jobnetctl disable <jobnet id>
+- Disable jobnet: 
+    - jobnetctl disable <jobnet id>
 
-- Run jobnet
-    jobnetctl run <jobnet id>
+- Run jobnet: 
+    - jobnetctl run <jobnet id>
 
-- Abort jobnet (force stop jobnet)
-    jobnetctl abort <jobnet id>
+- Abort jobnet (force stop jobnet): 
+    - jobnetctl abort <jobnet id>
 
-- Get jobnet's basic information
-    jobnetctl jobarg_get <jobnet id>
+- Get jobnet's basic information: 
+    - jobnetctl jobarg_get <jobnet id>
 
-- Get jobnet's status
-    jobnetctl jobnet_status <jobnet id>
+- Get jobnet's status: 
+    - jobnetctl jobnet_status <jobnet id>
 
-- Delete all jobnet information on server side
-    jobnetctl delete_all_jobnet <jobnet id>
+- Delete all jobnet information on server side: 
+    - jobnetctl delete_all_jobnet <jobnet id>
 
 # Execute query
     - adding the query into the script/querys.txt in recommanded. Format [ query_id : query ]
@@ -39,14 +39,14 @@
     * Testcase successfull ==> result = "0"
     * Testcase fail ==> result = "anything"
 
-    *Testcase log will be written to [/tmp/jaz_testing/testing_result/]
+    * Testcase log will be written to [/tmp/jaz_testing/testing_result/]
 
 # Update JAZ config parameters
-- Update parameter in jobarg_server.config 
-    jaz_conf_update server <parameter> <parameter value>
+- Update parameter in jobarg_server.config: 
+    - jaz_conf_update server <parameter> <parameter value>
 
-- Update parameter in jobarg_agentd.config 
-    jaz_conf_update server <parameter> <parameter value>
+- Update parameter in jobarg_agentd.config: 
+    - jaz_conf_update server <parameter> <parameter value>
 
 
      
