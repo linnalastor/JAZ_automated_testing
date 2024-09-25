@@ -10,6 +10,7 @@ rm -rf /tmp/jaz_testing/
 rm -rf /usr/local/bin/db_execute
 rm -rf /usr/local/bin/jobnetctl
 rm -rf /usr/local/bin/testresult
+rm -rf /usr/local/bin/jaz_conf_update
 
 mkdir -p /tmp/jaz_testing/testing_result
 
@@ -19,9 +20,12 @@ echo "database_type="$database_type"" | sudo tee -a /etc/environment > /dev/null
 
 cp -f querys.txt /tmp/jaz_testing/
 
+chmod +x ../scripts/*
+
 cp -f db_execute.sh /usr/local/bin/db_execute
 cp -f jobnetctl.sh /usr/local/bin/jobnetctl
 cp -f testresult.sh /usr/local/bin/testresult
+cp -f jaz_conf_update.sh /usr/local/bin/jaz_conf_update
 
 chmod +x ../Testcase/*
 cd /usr/local/bin/
