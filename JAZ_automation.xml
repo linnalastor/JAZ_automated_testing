@@ -311,7 +311,7 @@
     <multiple_start_up>0</multiple_start_up>
     <user_name>Admin</user_name>
     <jobnet_name>service_control</jobnet_name>
-    <memo>restart 120</memo>
+    <memo>restart 60</memo>
     <jobnet_timeout>0</jobnet_timeout>
     <timeout_run_type>0</timeout_run_type>
   </ja_jobnet_control_table>

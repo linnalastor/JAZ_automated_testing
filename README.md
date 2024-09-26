@@ -11,5 +11,5 @@ In order to run the testcases, you will need to do the following.
 6. Import the JAZ_automation.xml
 7. To execute all the testcase under 'Testcase' diractory, you need to execute start_testing.sh under 'Testcase' diractory
 
-Log output for executed testcase can be check under [/tmp/jaz_testing/testing_result]
+Result for executed testcase can be check under [/tmp/jaz_testing/testing_result]
 

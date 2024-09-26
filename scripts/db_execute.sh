@@ -21,7 +21,7 @@ case "$option" in
       sudo -u zabbix -p zabbix psql -t -A -f $1 
     else
       # [sudo -u zabbix -p zabbix psql < script] is use to execute sql file in psql database
-      sudo -u zabbix -p zabbix psql $1  > /dev/null 2>&1 
+      sudo -u zabbix -p zabbix psql < $1  > /dev/null 2>&1 
     fi
     ;;
   *)

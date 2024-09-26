@@ -25,10 +25,10 @@ fi
 jobnet_id=$2
 if [ "$option" == "enable" ] && [ "$#" -ne 4 ]; then
   if [ "$#" -lt 3 ]; then
-    echo "Usage: jobnetctl enable $jobnet_id <sub-jobnet's name> <sub-jobnet's description>"
+    echo "Usage: jobnetctl enable $jobnet_id <jobnet's name> <jobnet's description>"
     exit 1
   elif [ "$#" -lt 4 ]; then
-    echo "Usage: jobnetctl enable $jobnet_id $3 <sub-jobnet's description>"
+    echo "Usage: jobnetctl enable $jobnet_id $3 <jobnet's description>"
     exit 1
   fi
 fi

@@ -22,10 +22,10 @@ sleep 10
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 jobnetctl delete_all_jobnet
 if [ "$jobnet_status" == "4" ]; then
-  testresult log "testcase2.0.0" "0" $jobnet_id
+  testresult log "testcase2.3.1" "0" $jobnet_id
   exit 0
 else 
-    testresult log "failed_testcase2.0.0" "1" $jobnet_id
+    testresult log "failed_testcase2.3.1" "1" $jobnet_id
     exit 4
 fi
 

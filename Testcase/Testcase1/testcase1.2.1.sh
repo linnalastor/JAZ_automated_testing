@@ -15,9 +15,9 @@ fi
 
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 if [ "$jobnet_status" == "4" ]; then
-  testresult log "testcase1.0.0" "0" $jobnet_id
+  testresult log "testcase1.2.1" "0" $jobnet_id
   exit 0
 else
-  testresult log "failed_testcase2.0.0" "1" $jobnet_id
+  testresult log "failed_testcase1.2.1" "1" $jobnet_id
   exit 1
 fi

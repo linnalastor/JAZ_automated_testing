@@ -7,9 +7,9 @@ if [ "$jobnet_status" == "3" ]; then
   testresult log "testcase1.0.0" "0" $jobnet_id
   exit 0
 elif [ "$jobnet_status" == "4" ]; then  
-  testresult log "testcase1.0.0" "4" $jobnet_id
+  testresult log "testcase1.1.1" "4" $jobnet_id
   exit 4
 else
-    testresult log "failed_testcase2.0.0" "4" $jobnet_id
+    testresult log "failed_testcase1.1.1" "4" $jobnet_id
     exit 4
 fi

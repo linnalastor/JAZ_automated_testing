@@ -1,5 +1,5 @@
 server_ip_address="10.1.9.84" #ip address of the machine where JAZ service service exists
-agent_type="Win" # Win / Linux (target agent)
+agent_type="Linux" # Win / Linux (target agent)
 database_type="psql" # psql / mysql
 
 sed -i '/server_ip_address/d' /etc/environment

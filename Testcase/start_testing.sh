@@ -2,6 +2,7 @@ TARGET_DIR=$(pwd)
 subdirs=$(find "$TARGET_DIR" -mindepth 1 -maxdepth 1 -type d)
 count=0
 passed=0
+systemctl restart jobarg-server jobarg-agentd
 for dir in $subdirs; do
   scripts=$(find "$dir" -type f -name "*.sh")
   for script in $scripts; do

@@ -10,9 +10,9 @@ std_out=$(db_execute /tmp/jaz_testing/query.sql select)
 len=${#std_out}
 len=$((len + 5))
 if [ "$len" == 136 ]; then
-  testresult log "testcase3.1.4" "0" $jobnet_id
+  testresult log "testcase4.1.4" "0" $jobnet_id
   exit 0
 else
-  testresult log "testcase3.1.4" "-1" $jobnet_id
+  testresult log "testcase4.1.4" "-1" $jobnet_id
   exit 1
 fi

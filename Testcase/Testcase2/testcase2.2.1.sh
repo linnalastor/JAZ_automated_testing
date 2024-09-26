@@ -1,7 +1,7 @@
 source /etc/environment
 
 if [ "$agent_type" == "Win" ]; then 
-  jobnetctl enable "Window_Agent" "service_control" "restart 120"
+  jobnetctl enable "Window_Agent" "service_control" "restart 60"
   jobnetctl run "Window_Agent" > /dev/null 2>&1 
   sleep 10
 elif [ "$agent_type" == "Linux" ]; then 
@@ -21,13 +21,13 @@ fi
 sleep 10
 jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
 if [ "$jobnet_status" == "3" ]; then
-  testresult log "testcase2.0.0" "0" $jobnet_id
+  testresult log "testcase2.2.1" "0" $jobnet_id
   exit 0
 elif [ "$jobnet_status" == "4" ]; then
-    testresult log "failed_testcase2.0.0" "4" $jobnet_id
+    testresult log "failed_testcase2.2.1" "4" $jobnet_id
     exit 4
 else 
-    testresult log "failed_testcase2.0.0" "1" $jobnet_id
+    testresult log "failed_testcase2.1.1" "1" $jobnet_id
     exit 4
 fi
 
