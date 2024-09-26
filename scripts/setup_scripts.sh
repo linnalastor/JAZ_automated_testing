@@ -30,3 +30,36 @@ cp -f jaz_conf_update.sh /usr/local/bin/jaz_conf_update
 chmod +x ../Testcase/*
 cd /usr/local/bin/
 chmod +x db_execute jobnetctl testresult
+
+if [ "$1" == "check" ]; then
+    jobnetctl enable ${agent_type}_Jobnet "job_icon" hostname
+    result=$(echo $?)
+    if [ "$result" != "0" ]; then
+        echo "Something went wrong with DB execution. \n
+        Please check your 'database_type' parameters."
+        exit 1
+    fi
+    jobnet_id=$(jobnetctl run ${agent_type}_Jobnet)
+    result=$(echo $?)
+    if [ "$result" != "0" ]; then
+        echo "Something went wrong with job execution. \n
+        Please check your 'server_ip_address' parameters."
+        exit 1
+    fi
+    if [ "$jobnet_id" == "" ]; then
+        echo "Something went wrong with job execution. \n
+        Please importJAZ_automation.xml."
+        exit 1
+    fi
+    sleep 10
+    jobnet_status=$(jobnetctl jobnet_status $jobnet_id)
+    if [ "$jobnet_status" != "3" ]; then
+        echo "
+        Something went wrong with job execution. \n
+        Please check your 'agent_type' parameters. \n
+        (or)\n
+        Please check your hostname configuration in zabbix
+        "
+        exit 1
+    fi
+fi
