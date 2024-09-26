@@ -11,11 +11,11 @@ for dir in $subdirs; do
     bash "$script"
     return_code=$?
     testresult print $file_name $return_code
-    $defunct=$(ps -aux | grep defunct | wc -l)
-    if [ "$defunct" > "1" ]; then
+    defunct=$(ps -aux | grep defunct | wc -l)
+    if [ "$defunct" -gt "1" ]; then
       sleep 10
-      $defunct=$(ps -aux | grep defunct | wc -l)
-      if [ "$defunct" > "1" ]; then
+      defunct=$(ps -aux | grep defunct | wc -l)
+      if [ "$defunct" -gt "1" ]; then
         echo -e "\e[31m $defunct defunct process found. \e[0m "
       fi
     fi
