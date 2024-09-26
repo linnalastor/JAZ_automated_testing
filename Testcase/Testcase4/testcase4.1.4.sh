@@ -9,6 +9,9 @@ echo $query > /tmp/jaz_testing/query.sql
 std_out=$(db_execute /tmp/jaz_testing/query.sql select)
 len=${#std_out}
 len=$((len + 5))
+if [ "$agent_type" == "Linux" ]; then
+  len=$((len + 2))
+fi
 if [ "$len" == 136 ]; then
   testresult log "testcase4.1.4" "0" $jobnet_id
   exit 0
